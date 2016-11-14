@@ -1,0 +1,18 @@
+{
+  "name": "dicebot",
+  "version": "1.0.0",
+  "description": "A dice roll bot for Spark",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "ngrok": "^2.2.3",
+    "node-flint": "^4.3.1",
+    "random-js": "^1.0.8"
+  }
+}

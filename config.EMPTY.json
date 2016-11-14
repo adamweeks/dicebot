@@ -1,0 +1,5 @@
+{
+  "webhookUrl": "http://serverAddressWithTrailing/",
+  "token": "TOKEN_FROM_S4D_SITE",
+  "port": 80
+}
