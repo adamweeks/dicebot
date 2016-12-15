@@ -14,16 +14,34 @@ var flint = new Flint(config);
 flint.start();
 
 flint.hears(/.*/, function(bot, trigger) {
-  if (trigger.args[1] && trigger.args[1].includes('roll')){
+  if (trigger.args && trigger.args.indexOf('roll') !== -1){
+    const rollIndex = trigger.args.indexOf('roll');
+    const parmsIndex = rollIndex + 1;
     var max = 6;
-    if (trigger.args[2] && parseInt(trigger.args[2]) !== NaN){
-        max = parseInt(trigger.args[2]);
+    var min = 1;
+    var options = [];
+    // If it has an option after `roll`
+    if (trigger.args[parmsIndex]){
+      // If it is an integer, roll that many sides
+      if (Number.isInteger(trigger.args[parmsIndex])){
+        max = parseInt(trigger.args[parmsIndex]);
+      }
+      // If it is a comma separated array pick one of them
+      else if (trigger.args[parmsIndex].split(`,`).length > 1) {
+        options = trigger.args[parmsIndex].split(`,`);
+        min = 0;
+        max = options.length;
+      }
     }
-    const roll = random.integer(1, max);
+    const pick = random.integer(min, max);
+    var roll = pick;
+    if (options.length > 0) {
+      roll = options[pick];
+    }
     bot.say(`You rolled a ${roll}`);
   }
   else {
-    bot.say(`Uh, I can 'roll' or 'roll 10'`);
+    bot.say(`Uh, I can 'roll' or 'roll 10' or 'roll red,blue,green'`);
   }
 }, 20);
 
